@@ -9,23 +9,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int ac, char **nom)
+void Binarisation(int ac, char** nom)
 {
-    SDL_Surface *image_surface;
-
-    init_sdl();
-    //test if arg error
-    if (ac != 3)
+	if (ac != 3)
         errx(1,"wrong arg number, expected : 2\n format : <image_jpg> <bin_methode>");
     char *str = nom[ac - 2];
     
     //load image
-    image_surface = load_image(str);
+    SDL_Surface* image_surface = load_image(str);
 
     int width = image_surface->w;
     int height = image_surface->h;
 
-// BINARISATION
+ 	// BINARISATION
     double aveR = 0, aveG = 0, aveB = 0;
     int black = 255;
     int white = 0;
@@ -47,7 +43,7 @@ int main(int ac, char **nom)
         aveR = aveR / (width * height);
         aveG = aveG / (width * height);
         aveB = aveB / (width * height);
-// METHODE SIMPLE
+	// METHODE SIMPLE
     //use 127 as average rgb value
         if ((aveR+aveG+aveB)/3 < 127)
         {
@@ -75,7 +71,7 @@ int main(int ac, char **nom)
     }
     else
     {
-// METHODE OTSU
+	// METHODE OTSU
     //Otsu method that determine optimized rgb value
         int seuil = toBin(image_surface);
         if (seuil < 127)
@@ -103,7 +99,15 @@ int main(int ac, char **nom)
         }
     }
     
-    
+}
+
+int main(int argc, char **argv)
+{
+    SDL_Surface *image_surface;
+
+    init_sdl();
+    //test if arg error
+    Binarisation(argc,argv);
     //ton code
 
 
