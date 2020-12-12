@@ -18,6 +18,26 @@ int isColored(Uint32 pixel, SDL_Surface *image, int r1, int g1, int b1)
     return 0;
 }
 
+void ColorLine(SDL_Surface *image, int x, int width, int r, int g, int b)
+{
+    for (int i = 0; i < width; i++)
+    {
+        Uint32 pixel = get_pixel(image, i, x);
+        pixel = SDL_MapRGB(image->format, r, g, b);
+        put_pixel(image, i, x, pixel);
+    }
+}
+
+void ColorSemiColumn(SDL_Surface *image, int y, int h1, int h2, int r, int g, int b)
+{
+    for (int i = h1; i < h2; i++)
+    {
+        Uint32 pixel = get_pixel(image, y, i);
+        pixel = SDL_MapRGB(image->format, r, g, b);
+        put_pixel(image, y, i, pixel);
+    }
+}
+
 
 int toBin(SDL_Surface *image)
 {
