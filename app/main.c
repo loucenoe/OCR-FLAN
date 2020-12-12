@@ -19,16 +19,6 @@ char* Get_ImgPath(int argc , char ** argv)
     return argv[1];
 }
 
-SDL_Surface* Load_bmp(char* Path)
-{
-    SDL_Surface* img;
-
-    img = SDL_LoadBMP(Path);
-    if (img == NULL)
-        errx(1,"ERROR : load BMP failed > %s",SDL_GetError());
-
-    return img;
-}
 
 void Binarisation(SDL_Surface* image_surface)
 {
@@ -77,10 +67,10 @@ int main(int argc, char** argv)
     char* Path = Get_ImgPath(argc,argv);
 
     //__________________INIT SDL_________________
-    init_SDL();
+    init_sdl();
 
     //__________________LOAD IMG_________________
-    img_surface = Load_bmp(Path);
+    img_surface = load_image(Path);
 
     if( img_surface == NULL)
         printf("ERROR : Failed to load img BMP");
@@ -97,7 +87,7 @@ int main(int argc, char** argv)
 
 
     //______________Save new image________________
-    SDL_SaveBMP(img_surface,"/newImage.bmp");
+    SDL_SaveBMP(img_surface,"newImage.bmp");
 
     //_______________FREE SURFACE________________
     SDL_FreeSurface(img_surface);
@@ -105,4 +95,4 @@ int main(int argc, char** argv)
 
     return 0;
 }
-}
+
