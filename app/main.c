@@ -36,7 +36,6 @@ void Binarisation(SDL_Surface* image_surface)
     int height = image_surface->h;
 
  	// BINARISATION
-    double aveR = 0, aveG = 0, aveB = 0;
     int black = 255;
     int white = 0;
     //determine average
@@ -53,7 +52,7 @@ void Binarisation(SDL_Surface* image_surface)
     {
         for (int j = 0; j < height; j++)
         {
-            int32 pixel = get_pixel(image_surface, i, j);
+            Uint32 pixel = get_pixel(image_surface, i, j);
             SDL_GetRGB(pixel, image_surface->format, &r, &g, &b);
             if ((r + g + b) / 3 > seuil)
             {
@@ -78,13 +77,17 @@ int main(int argc, char** argv)
     char* Path = Get_ImgPath(argc,argv);
 
     //__________________INIT SDL_________________
-    Init_SDL();
+    init_SDL();
 
     //__________________LOAD IMG_________________
     img_surface = Load_bmp(Path);
 
     if( img_surface == NULL)
         printf("ERROR : Failed to load img BMP");
+
+
+    //______________Binarization_________________
+    Binarisation(img_surface);
 
 
     //______________Segmentation_________________
@@ -101,4 +104,5 @@ int main(int argc, char** argv)
 
 
     return 0;
+}
 }
