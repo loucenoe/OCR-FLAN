@@ -4,7 +4,7 @@
 
 void help()
 {
-    printf("Welcome to Epiread V0.2 \nHere is some commands : \n");
+    printf("OCR_FLAN\nHere is some commands : \n");
     printf("   --help  To picture commands\n");
     printf("   --XOR  To show the neural network for the XOR function\n");
     printf("   --OCR  To show the neural network for OCR\n");
