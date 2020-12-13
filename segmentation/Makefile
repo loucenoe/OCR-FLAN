@@ -17,7 +17,7 @@ segmentation.o : segment_lines.h pixel_fonction.h segment_char.h segment_hori_ch
 clean:
 	${RM} *.o
 	${RM} *.d
-	${RM} segmentation
+	#${RM} segmentation
 	${RM} *~
 	${RM} '*'
 

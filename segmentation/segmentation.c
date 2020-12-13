@@ -58,7 +58,7 @@ int main(int argc, char** argv)
     //______________Segmentation_________________
     Segment_lines(img_surface);
     Segment_char(img_surface);
-    //Segment_hori_char(img_surface);
+    Segment_hori_char(img_surface);
 
 
     //______________Save new image________________

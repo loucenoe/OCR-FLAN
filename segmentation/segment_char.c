@@ -65,8 +65,8 @@ int Get_PosBlueLine(SDL_Surface* img , int line)
     return i;
 }
 
-
-void Draw_lines(SDL_Surface* img , int* Tab , int line ,int  hmax)
+static inline
+void Draw_Lines(SDL_Surface* img , int* Tab , int line ,int  hmax)
 {
     int w = img -> w;
     int Last_nb;
@@ -89,8 +89,7 @@ void Draw_lines(SDL_Surface* img , int* Tab , int line ,int  hmax)
 }
 
 
-static inline
-void Segment_CharOnLine(SDL_Surface* img,int line)
+void Segment_CharOnLine(SDL_Surface* img, int line)
 {
     //____________Init Value__________
     int* Tab_BorW;
@@ -108,11 +107,10 @@ void Segment_CharOnLine(SDL_Surface* img,int line)
     Change_tab(img,Tab_BorW,line,hmax);
 
     //Draw Lines
-    Draw_lines(img,Tab_BorW,line,hmax);
+    Draw_Lines(img,Tab_BorW,line,hmax);
 
     free(Tab_BorW);
 }
-
 
 
 

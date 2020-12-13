@@ -25,7 +25,6 @@ int Is_line_black(SDL_Surface* img , int x)
         ++y;
     }
 
-
     return is_black;
 }
 
@@ -82,15 +81,12 @@ void Segment_lines(SDL_Surface* img)
     //Create a tab of the size of heigth
     tab_BorW = calloc(heigth,sizeof(int));
 
-
     //Changes the cells of the tabs if its a texted lines.
     Changes_tab(img , tab_BorW);
 
     //_____________Treament___________
-
-
     Draw_Lines(img,tab_BorW);
 
-    free(tab_BorW);
 
+    free(tab_BorW);
 }

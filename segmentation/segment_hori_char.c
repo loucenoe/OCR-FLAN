@@ -16,7 +16,7 @@ int Is_char_zone(SDL_Surface* img, int x, int y)
 	return 0;
 }
 
-
+static inline
 int Is_line_black(SDL_Surface* img , int x, int y, int width)
 {
     int is_black = 0;
@@ -80,7 +80,8 @@ int Get_heigth_char(SDL_Surface* img, int x, int y)
     return i - x;
 }
 
-void Change_Tab(SDL_Surface* img, int* Tab, int x, int y, int h, int w)
+static inline
+void Change_tab(SDL_Surface* img, int* Tab, int x, int y, int h, int w)
 //Put 0 and 1 in case case of the tab depending if its a char line.
 {
 	for (int i = 0; i < h; ++i)
@@ -96,43 +97,28 @@ void Change_Tab(SDL_Surface* img, int* Tab, int x, int y, int h, int w)
 void Draw_Lines(SDL_Surface* img,int* Tab, int x, int y, int width, int height)
 {
     int Last_nb = 0;
-    //int fst_line = 0;
-    //int lst_line = 0;
 	
-    for (int i = x ; i < height + x /*&& !fst_line*/; ++i)
+    for (int i = x ; i < height + x ; ++i)
     {
         if (Last_nb != Tab[i - x])
-        {
         	Draw_HorizontalLine(img, y, y + width ,i-1,0,255,0);
-        	//fst_line = 1;
-        }
+        
         Last_nb = Tab[i-x];
     }
-/*
-    Last_nb = 0;
-    for (int j = x + height ; j > x && !lst_line; --j)
-    {
-        if (Last_nb != Tab[j - x])
-        {
-        	Draw_HorizontalLine(img, y, y + width ,j+1,0,255,0);
-        	lst_line = 1;
-        }
-        Last_nb = Tab[j-x];
-    }
-*/
 }
 
 void Segment_redim_char(SDL_Surface* img, int x, int y, int height)
 //re-draw the horizontal line that define a char zone.
 {
+    //Init values
 	int* Tab_BorW;
-	//int height = Get_heigth_char(img,x,y);
 	int width = Get_width_char(img,x,y);
-
 	Tab_BorW = calloc(height,sizeof(int));
 
-	Change_Tab(img, Tab_BorW, x, y, height, width);
+    //Change value of Tab_BorW
+	Change_tab(img, Tab_BorW, x, y, height, width);
 
+    //Update Image
 	Draw_Lines(img, Tab_BorW, x, y, width, height);
 
 	free(Tab_BorW);
