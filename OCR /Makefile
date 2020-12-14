@@ -1,5 +1,3 @@
-#Makefile
-#Authors : antoine.montes
 
 CC=gcc -rdynamic
 
